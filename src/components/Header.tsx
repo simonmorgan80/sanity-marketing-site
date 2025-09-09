@@ -3,19 +3,14 @@ import Link from 'next/link';
 export function Header() {
     return (
         <div className="p-6">
-            <header className="bg-white/80 flex items-center justify-between p-6 rounded-lg container mx-auto">
-                <Link className="md:text-xl font-bold tracking-tight" href="/">
-                    Marketing
+            <header className="flex items-center justify-between max-w-7xl mx-auto lg:p-6">
+                <Link className="md:text-xl font-semibold" href="/">
+                    Marketing Site
                 </Link>
-                <ul className="flex items-center gap-4 font-semibold text-slate-700">
+                <ul className="flex items-center gap-4 font-semibold">
                     <li>
-                        <Link className="transition-colors" href="/posts">
-                            Posts
-                        </Link>
-                    </li>
-                    <li>
-                        <Link className="transition-colors" href="/studio">
-                            Sanity Studio
+                        <Link className="" href="/posts">
+                            Blog
                         </Link>
                     </li>
                 </ul>

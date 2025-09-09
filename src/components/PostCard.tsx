@@ -11,12 +11,10 @@ export function PostCard(props: POSTS_QUERYResult[0]) {
 
     return (
         <Link className="group" href={`/posts/${props.slug!.current}`}>
-            <article className="flex flex-col-reverse gap-4 md:grid md:grid-cols-12 md:gap-0">
-                <div className="md:col-span-2 md:pt-1">
+            <article className="flex flex-col-reverse gap-4 md:grid md:grid-cols-12">
+                <div className="md:col-span-8 md:w-full">
                     <Categories categories={categories} />
-                </div>
-                <div className="md:col-span-5 md:w-full">
-                    <h2 className="text-2xl text-pretty font-semibold text-slate-800 transition-colors relative">
+                    <h2 className="text-2xl text-pretty font-semibold transition-colors relative mt-4">
                         <span className="relative z-[1]">{title}</span>
                     </h2>
                     <div className="flex items-center mt-2 md:mt-6 gap-x-6">
@@ -24,9 +22,10 @@ export function PostCard(props: POSTS_QUERYResult[0]) {
                         <PublishedAt publishedAt={publishedAt} />
                     </div>
                 </div>
-                <div className="md:col-start-9 md:col-span-4 rounded-lg overflow-hidden flex">
+                <div className="md:col-span-4 overflow-hidden flex">
                     {mainImage ? (
                         <Image
+                            className="w-full"
                             src={urlFor(mainImage).width(400).height(200).url()}
                             width={400}
                             height={200}
