@@ -14,9 +14,9 @@ export default async function FrontendLayout({
         <section className="bg-white min-h-screen">
             <Header />
             {children}
-            <SanityLive />
             {(await draftMode()).isEnabled && (
                 <>
+                    <SanityLive />
                     <DisableDraftMode />
                     <VisualEditing />
                 </>
