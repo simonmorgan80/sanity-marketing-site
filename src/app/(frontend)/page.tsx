@@ -1,12 +1,13 @@
-import Link from 'next/link';
-import { Title } from '@/components/Title';
+import { PageBuilder } from '@/components/PageBuilder';
+import { sanityFetch } from '@/sanity/lib/live';
+import { HOME_PAGE_QUERY } from '@/sanity/lib/queries';
 
 export default async function Page() {
-    return (
-        <section className="max-w-7xl mx-auto grid grid-cols-1 gap-6 p-6">
-            <Title>Marketing Site</Title>
-            <hr />
-            <Link href="/posts">Blog &rarr;</Link>
-        </section>
-    );
+    const { data: page } = await sanityFetch({
+        query: HOME_PAGE_QUERY,
+    });
+
+    return page?.homePage?.content ? (
+        <PageBuilder content={page?.homePage.content} />
+    ) : null;
 }
