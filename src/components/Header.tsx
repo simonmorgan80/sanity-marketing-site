@@ -9,6 +9,11 @@ export function Header() {
                 </Link>
                 <ul className="flex items-center gap-4 font-semibold">
                     <li>
+                        <Link className="" href="/demo-page">
+                            Demo Page
+                        </Link>
+                    </li>
+                    <li>
                         <Link className="" href="/posts">
                             Blog
                         </Link>

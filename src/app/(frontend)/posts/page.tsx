@@ -8,7 +8,7 @@ export default async function Page() {
 
     return (
         <main className="max-w-7xl mx-auto grid grid-cols-1 gap-6 p-6">
-            <Title>Post Index</Title>
+            <Title>Blog</Title>
             <div className="flex flex-col gap-24 py-12">
                 {posts.map((post) => (
                     <PostCard key={post._id} {...post} />
