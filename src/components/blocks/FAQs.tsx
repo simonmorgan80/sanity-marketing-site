@@ -1,5 +1,19 @@
 import { PAGE_QUERYResult } from '@/sanity/types';
 import { PortableText } from 'next-sanity';
+import { FAQPage, WithContext } from 'schema-dts';
+
+const generateFaqData = (faqs: FAQsProps['faqs']): WithContext<FAQPage> => ({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs?.map((faq) => ({
+        '@type': 'Question',
+        name: faq.title!,
+        acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.text!,
+        },
+    })),
+});
 
 type FAQsProps = Extract<
     NonNullable<NonNullable<PAGE_QUERYResult>['content']>[number],
@@ -7,8 +21,14 @@ type FAQsProps = Extract<
 >;
 
 export function FAQs({ _key, title, faqs }: FAQsProps) {
+    const faqData = generateFaqData(faqs);
+
     return (
         <section className="max-w-7xl mx-auto my-16 lg:my-24 px-6">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }}
+            />
             {title ? (
                 <h2 className="text-3xl text-center lg:text-4xl font-semibold text-slate-800 mb-16">
                     {title}
