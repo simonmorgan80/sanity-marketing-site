@@ -1071,7 +1071,7 @@ export type REDIRECTS_QUERYResult = Array<{
   permanent: boolean | null;
 }>;
 // Variable: OG_IMAGE_QUERY
-// Query: *[_id == $id][0]{    title,    "image": mainImage.asset->{      ...,      url,      metadata {        palette      }    }  }
+// Query: *[_id == $id][0]{    title,    "image": mainImage.asset->{      "asset": {      url      },      metadata {        palette      }    }  }
 export type OG_IMAGE_QUERYResult = {
   title: null;
   image: null;
@@ -1081,28 +1081,12 @@ export type OG_IMAGE_QUERYResult = {
 } | {
   title: string | null;
   image: {
-    _id: string;
-    _type: "sanity.imageAsset";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    originalFilename?: string;
-    label?: string;
-    title?: string;
-    description?: string;
-    altText?: string;
-    sha1hash?: string;
-    extension?: string;
-    mimeType?: string;
-    size?: number;
-    assetId?: string;
-    uploadId?: string;
-    path?: string;
-    url: string | null;
+    asset: {
+      url: string | null;
+    };
     metadata: {
       palette: SanityImagePalette | null;
     } | null;
-    source?: SanityAssetSourceData;
   } | null;
 } | null;
 // Variable: SITEMAP_QUERY
@@ -1122,7 +1106,7 @@ declare module "@sanity/client" {
     "*[_type == \"page\" && slug.current == $slug][0]{\n  ...,\n  \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n  content[]{\n    ...,\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->{\n        _id,\n        title,\n        body,\n        \"text\": pt::text(body)\n      }\n    }\n  }\n}": PAGE_QUERYResult;
     "*[_id == \"siteSettings\"][0]{\n    homePage->{\n      ...,\n      content[]{\n        ...,\n        _type == \"faqs\" => {\n          ...,\n          faqs[]->{\n            _id,\n            title,\n            body,\n            \"text\": pt::text(body)\n          }\n        }\n      }      \n    }\n  }": HOME_PAGE_QUERYResult;
     "\n  *[_type == \"redirect\" && isEnabled == true] {\n      source,\n      destination,\n      permanent\n  }\n": REDIRECTS_QUERYResult;
-    "\n  *[_id == $id][0]{\n    title,\n    \"image\": mainImage.asset->{\n      ...,\n      url,\n      metadata {\n        palette\n      }\n    }\n  }    \n": OG_IMAGE_QUERYResult;
+    "\n  *[_id == $id][0]{\n    title,\n    \"image\": mainImage.asset->{\n      \"asset\": {\n      url\n      },\n      metadata {\n        palette\n      }\n    }\n  }    \n": OG_IMAGE_QUERYResult;
     "\n*[_type in [\"page\", \"post\"] && defined(slug.current)] {\n    \"href\": select(\n      _type == \"page\" => \"/\" + slug.current,\n      _type == \"post\" => \"/posts/\" + slug.current,\n      slug.current\n    ),\n    _updatedAt\n}\n": SITEMAP_QUERYResult;
   }
 }

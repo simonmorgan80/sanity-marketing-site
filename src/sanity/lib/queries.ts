@@ -113,8 +113,9 @@ export const OG_IMAGE_QUERY = defineQuery(`
   *[_id == $id][0]{
     title,
     "image": mainImage.asset->{
-      ...,
-      url,
+      "asset": {
+      url
+      },
       metadata {
         palette
       }
