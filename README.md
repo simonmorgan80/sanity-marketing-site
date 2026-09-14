@@ -1,14 +1,3 @@
-# Sanity and Next.js
+# Sanity and Next.js demo
 
-This is a [Sanity.io](https://sanity.io) and [Next.js](https://nextjs.org) project.
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-```
-
-- Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-- Open [http://localhost:3000/studio](http://localhost:3000/studio) to edit content.
+Simple marketing site demo whilst learning Sanity (https://www.sanity.io/) headless CMS
